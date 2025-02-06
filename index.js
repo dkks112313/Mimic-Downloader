@@ -13,6 +13,8 @@ if (!fs.existsSync(rootPath)) {
     fs.mkdirSync(rootPath);
 }
 
+const platformRunnable = os.platform() === 'win32' ? 'Mimic-Launcher.exe' : os.platform() === 'darwin' ? 'Mimic-Launcher.app' : 'Mimic-Launcher';
+
 const repository = "dkks112313/dist-install"
 const configPath = path.join(rootPath, "version.ini");
 
@@ -156,7 +158,7 @@ app.on('ready', function () {
                                 workingDirectory: path.dirname(exePath),
                             });
 
-                            exec(path.join(rootPath, 'Mimic-Launcher.exe'))
+                            exec(path.join(rootPath, platformRunnable))
                         })
                         .then(() => {
                             progressBar.setCompleted();
